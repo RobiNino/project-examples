@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.jfrog.test</groupId>
         <artifactId>multi</artifactId>
-        <version>3.8.x-SNAPSHOT-1-6-SHARED</version>
+        <version>3.8.x-SNAPSHOT-1-6-OVERRIDE</version>
     </parent>
 
     <artifactId>multi3</artifactId>
