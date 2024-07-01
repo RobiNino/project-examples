@@ -29,4 +29,4 @@ jobs:
           jf npm-config --repo-resolve npm-remote --repo-deploy npm-local
           jf npm i
           jf npm publish
-          jf bp
+          jf rt bp
