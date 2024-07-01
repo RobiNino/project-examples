@@ -26,7 +26,7 @@ jobs:
           jf rt ping
           # Collect environment variables for the build
           cd npm-example
-          jf npm-config --repo-resolve npm --repo-deploy npm
+          jf npm-config --repo-resolve npm-remote --repo-deploy npm-local
           jf npm i
           jf npm publish
           jf bp
