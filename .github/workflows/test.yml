@@ -1,0 +1,32 @@
+name: "JFrog CLI Example"
+on: push
+
+permissions:
+  # This is required for requesting the OIDC token
+  id-token: write
+  # This is required for actions/checkout
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+        env:
+          # JFrog platform url (for example: https://acme.jfrog.io)
+          JF_URL: ${{ secrets.JF_URL }}
+          JF_USER: ${{ secrets.JF_USER }}
+          JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+
+      - name: Run JFrog CLI
+        run: |
+          # Ping the server
+          jf rt ping
+          # Collect environment variables for the build
+          cd npm-example
+          jf npm-config --repo-resolve npm --repo-deploy npm
+          jf npm i
+          jf npm publish
+          jf bp
