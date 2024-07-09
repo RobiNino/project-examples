@@ -17,14 +17,17 @@ jobs:
         env:
           # JFrog platform url (for example: https://acme.jfrog.io)
           JF_URL: ${{ vars.JF_URL }}
+          JF_USER: ${{ secrets.JF_USER }}
+          JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
         with:
           # OIDC provider name from the OIDC integration page in the JFrog Platform
-          oidc-provider-name: robi-oidc-test-groups
+          #oidc-provider-name: robi-oidc-test-groups
           version: 2.100.0
           download-repository: generic-local-robi
 
       - name: Run JFrog CLI
         run: |
+          jf -v
           # Ping the server
           jf rt ping
           # Collect environment variables for the build
