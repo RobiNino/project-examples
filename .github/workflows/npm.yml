@@ -19,7 +19,7 @@ jobs:
           JF_URL: ${{ vars.JF_URL }}
         with:
           # OIDC provider name from the OIDC integration page in the JFrog Platform
-          oidc-provider-name: setup-jfrog-cli
+          oidc-provider-name: robi-oidc-test
 
       - name: Run JFrog CLI
         run: |
