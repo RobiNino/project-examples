@@ -29,7 +29,9 @@ jobs:
       - name: Run JFrog CLI
         run: |
           jf -v
+          ls -al
           jf rt dl generic-local-robi/v2/2.100.0/jfrog-cli-linux-amd64/jfrog ./jfrog
+          ls -al
           ./jfrog -v
           # Ping the server
           ./jfrog rt ping
