@@ -29,6 +29,7 @@ jobs:
       - name: Run JFrog CLI
         run: |
           jf -v
+          jf rt dl generic-local-robi/dir-v0-0-0/data-1-769285301
           # Ping the server
           jf rt ping
           # Collect environment variables for the build
