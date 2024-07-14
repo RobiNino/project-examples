@@ -30,7 +30,7 @@ jobs:
         run: |
           jf -v
           ls -al
-          jf rt dl generic-local-robi/*/jfrog-cli-linux-amd64/* --fail-no-op
+          jf rt s generic-local-robi/*
           ls -al
           ./jfrog -v
           # Ping the server
