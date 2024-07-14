@@ -36,6 +36,6 @@ jobs:
           ./jfrog rt ping
           # Collect environment variables for the build
           cd npm-example
-          ./jfrog npm-config --repo-resolve npm-remote
-          ./jfrog npm i
-          ./jfrog rt bp
+          ../jfrog npm-config --repo-resolve npm-remote
+          ../jfrog npm i
+          ../jfrog rt bp
