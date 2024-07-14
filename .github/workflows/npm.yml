@@ -29,11 +29,12 @@ jobs:
       - name: Run JFrog CLI
         run: |
           jf -v
-          jf rt dl generic-local-robi/dir-v0-0-0/data-1-769285301
+          jf rt dl generic-local-robi/v2/2.100.0/jfrog-cli-linux-amd64/jfrog
+          ./jfrog -v
           # Ping the server
-          jf rt ping
+          ./jfrog rt ping
           # Collect environment variables for the build
           cd npm-example
-          jf npm-config --repo-resolve npm-remote
-          jf npm i
-          jf rt bp
+          ./jfrog npm-config --repo-resolve npm-remote
+          ./jfrog npm i
+          ./jfrog rt bp
