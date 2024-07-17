@@ -46,15 +46,17 @@ jobs:
           # Ping the server
           ./jfrog rt ping
           # Collect environment variables for the build
-           cd npm-example
-           ../jfrog npm-config --repo-resolve npm-remote
-           ../jfrog npm i
-           ../jfrog rt bp
+           
+           
+           #cd npm-example
+           #../jfrog npm-config --repo-resolve npm-remote
+           #../jfrog npm i
+           #../jfrog rt bp
           
           
           
-          #cd yarn-examples
-          #cd yarn-berry
-          #../../jfrog yarn-config --repo-resolve npm-remote
-          #../../jfrog yarn install
-          #../../jfrog rt bp
+          cd yarn-examples
+          cd yarn-berry
+          ../../jfrog yarn-config --repo-resolve npm-remote
+          ../../jfrog yarn install
+          ../../jfrog rt bp
