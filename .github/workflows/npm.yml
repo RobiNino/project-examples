@@ -34,10 +34,10 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: enable yarn
-        run: |
-          corepack enable
-          yarn set version 2.4.0
+      #- name: enable yarn
+      #  run: |
+      #    corepack enable
+      #    yarn set version 2.4.0
 
       - name: Run JFrog CLI
         run: |
@@ -56,5 +56,5 @@ jobs:
           # ../jfrog npm i
           # ../jfrog rt bp
           ../jfrog yarn-config --repo-resolve npm-remote
-          ../jfrog yarn i
+          ../jfrog yarn
           ../jfrog rt bp
