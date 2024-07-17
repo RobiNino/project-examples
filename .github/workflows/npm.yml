@@ -37,7 +37,7 @@ jobs:
       - name: enable yarn
         run: |
           corepack enable
-          yarn set version 3.x
+          yarn set version latest
 
       - name: Run JFrog CLI
         run: |
