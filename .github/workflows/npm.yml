@@ -51,9 +51,6 @@ jobs:
           # ../jfrog rt bp
           cd yarn-examples
           cd yarn-berry
-          #../../jfrog yarn-config --repo-resolve npm-remote
-          #../../jfrog yarn install
-          #../../jfrog rt bp
-          jf yarn-config --repo-resolve npm-remote
-          jf yarn install
-          jf rt bp
+          ../../jfrog yarn-config --repo-resolve npm-remote
+          ../../jfrog yarn install
+          ../../jfrog rt bp
