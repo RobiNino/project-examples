@@ -11,10 +11,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        #os: [ ubuntu, macos ]
+        os: [ ubuntu, macos ]
         node: [ "12", "13", "14", "15", "16", "17", "18", "19", "20" ]
-    #runs-on: ${{ matrix.os }}-latest
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}-latest
+    #runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -42,11 +42,11 @@ jobs:
           node -v
           npm -v
           jf -v
-          jf rt dl generic-local-robi/v2/2.100.0/jfrog-cli-linux-amd64/jfrog --flat --fail-no-op
-          chmod +x ./jfrog
-          ./jfrog -v
+          #jf rt dl generic-local-robi/v2/2.100.0/jfrog-cli-linux-amd64/jfrog --flat --fail-no-op
+          #chmod +x ./jfrog
+          #./jfrog -v
           # Ping the server
-          ./jfrog rt ping
+          #./jfrog rt ping
           # Collect environment variables for the build
            
            
