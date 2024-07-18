@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu, macos ]
+        #os: [ ubuntu, macos ]
         node: [ "12", "13", "14", "15", "16", "17", "18", "19", "20" ]
     #runs-on: ${{ matrix.os }}-latest
     runs-on: ubuntu-latest
@@ -51,10 +51,15 @@ jobs:
            
            
           #cd npm-example
+          #cd npmpostinstall
+          #../jfrog npm-config --repo-resolve npm-remote
+          #../jfrog npm i
+          #../jfrog rt bp
+          
           cd npmpostinstall
-          ../jfrog npm-config --repo-resolve npm-remote
-          ../jfrog npm i
-          ../jfrog rt bp
+          jf npm-config --repo-resolve npm-remote
+          jf npm i
+          jf rt bp
                     
           
           #cd yarn-examples
