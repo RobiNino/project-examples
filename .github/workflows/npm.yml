@@ -11,10 +11,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu, macos ]
+        #os: [ ubuntu, macos ]
         node: [ "12", "13", "14", "15", "16", "17", "18", "19", "20" ]
-    runs-on: ${{ matrix.os }}-latest
-    #runs-on: ubuntu-latest
+    #runs-on: ${{ matrix.os }}-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,9 +23,9 @@ jobs:
         env:
           # JFrog platform url (for example: https://acme.jfrog.io)
           JF_URL: ${{ vars.JF_URL }}
-          #JF_USER: ${{ secrets.JF_USER }}
-          #JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
-          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+          JF_USER: ${{ secrets.JF_USER }}
+          JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+          #JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
         with:
           # OIDC provider name from the OIDC integration page in the JFrog Platform
           #oidc-provider-name: robi-oidc-test-groups
@@ -42,25 +42,25 @@ jobs:
           node -v
           npm -v
           jf -v
-          #jf rt dl generic-local-robi/v2/2.100.0/jfrog-cli-linux-amd64/jfrog --flat --fail-no-op
-          #chmod +x ./jfrog
-          #./jfrog -v
+          jf rt dl generic-local-robi/v2/2.100.0/jfrog-cli-linux-amd64/jfrog --flat --fail-no-op
+          chmod +x ./jfrog
+          ./jfrog -v
           # Ping the server
-          #./jfrog rt ping
+          ./jfrog rt ping
           # Collect environment variables for the build
            
            
           #cd npm-example
-          #cd npmpostinstall
-          #../jfrog npm-config --repo-resolve npm-remote
-          #../jfrog npm i
-          #../jfrog rt bp
+          cd npmpostinstall
+          ../jfrog npm-config --repo-resolve npm-remote
+          ../jfrog npm i
+          ../jfrog rt bp
           
           #cd npmpostinstall
-          cd npm-example
-          jf npm-config --repo-resolve npm-remote
-          jf npm i
-          jf rt bp
+          #cd npm-example
+          #jf npm-config --repo-resolve npm-remote
+          #jf npm i
+          #jf rt bp
                     
           
           #cd yarn-examples
