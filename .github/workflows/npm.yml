@@ -56,7 +56,8 @@ jobs:
           #../jfrog npm i
           #../jfrog rt bp
           
-          cd npmpostinstall
+          #cd npmpostinstall
+          cd npm-example
           jf npm-config --repo-resolve npm-remote
           jf npm i
           jf rt bp
