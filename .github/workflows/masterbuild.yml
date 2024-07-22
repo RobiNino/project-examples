@@ -16,9 +16,9 @@ jobs:
         uses: jfrog/setup-jfrog-cli@v4
         env:
           JF_URL: ${{ vars.JF_URL }}
-          #JF_USER: ${{ secrets.JF_USER }}
-          #JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
-          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+          JF_USER: ${{ secrets.JF_USER }}
+          JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+          #JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
         with:
           # OIDC provider name from the OIDC integration page in the JFrog Platform
           #oidc-provider-name: robi-oidc-test-groups
@@ -44,7 +44,7 @@ jobs:
           mvn -v
           python --version
           pip --version
-          wheel -h
+          wheel version
           pip show setuptools
           echo $VIRTUAL_ENV
           node -v
@@ -54,7 +54,7 @@ jobs:
       - name: Docker build
         run: |
           cd docker-oci-examples/fat-manifest-example
-          docker login ${{ vars.JF_URL }}
+          echo ${{ secrets.JF_PASSWORD }} | docker login ${{ vars.JF_URL }} --u ${{ secrets.JF_USER }} --password-stdin
           docker buildx install
           docker buildx create --use --name mybuilder --driver docker-container
           docker buildx build --platform=linux/amd64,linux/arm64,linux/arm/v7 --tag=${{ vars.JF_URL }}/docker-local/multiarch-image:1 -f=Dockerfile.Fatmanifest --metadata-file=build-metadata --push .
