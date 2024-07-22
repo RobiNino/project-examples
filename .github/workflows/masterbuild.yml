@@ -70,7 +70,7 @@ jobs:
       - name: Pip build
         run: |
           cd python-example/pip-example/
-          jf pip-config --repo-resolve=default-pypi-virtual
+          jf pip-config --repo-resolve=robi-pypi-virtual
           jf pip install . --module=jfrog-python-example
           python setup.py sdist bdist_wheel
           jf rt u dist/ pypi/ --module=jfrog-python-example
