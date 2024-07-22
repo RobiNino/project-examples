@@ -73,7 +73,7 @@ jobs:
           jf pip-config --repo-resolve=robi-pypi-virtual
           jf pip install . --module=jfrog-python-example
           python setup.py sdist bdist_wheel
-          jf rt u dist/ pypi/ --module=jfrog-python-example
+          jf rt u dist/ robi-pypi-virtual/ --module=jfrog-python-example
 
       - name: Npm build
         run: |
@@ -84,7 +84,7 @@ jobs:
       - name: Go build
         run: |
           cd golang-example
-          jf go-config --repo-resolve=go-virtual --repo-deploy=go-virtual
+          jf go-config --repo-resolve=robi-go --repo-deploy=robi-go
           jf go build
           jf go-publish v1.0.0
 
