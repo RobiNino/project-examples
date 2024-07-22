@@ -69,7 +69,7 @@ jobs:
 
       - name: Pip build
         run: |
-          cd python-example/pip-example/pythonExample
+          cd python-example/pip-example/
           jf pip-config --repo-resolve=default-pypi-virtual
           jf pip install . --module=jfrog-python-example
           python setup.py sdist bdist_wheel
@@ -80,6 +80,13 @@ jobs:
           cd npm-example
           jf npm-config --repo-resolve=npm-remote
           jf npm i
+
+      - name: Go build
+        run: |
+          cd golang-example
+          jf go-config --repo-resolve=go-virtual --repo-deploy=go-virtual
+          jf go build
+          jf go-publish v1.0.0
 
       - name: Publish build info
         run: |
