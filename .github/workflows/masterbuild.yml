@@ -78,8 +78,9 @@ jobs:
       - name: Npm build
         run: |
           cd npm-example
-          jf npm-config --repo-resolve=npm-remote
+          jf npm-config --repo-resolve=robi-npm --repo-deploy=robi-npm
           jf npm i
+          jf npm publish
 
       - name: Go build
         run: |
@@ -87,6 +88,11 @@ jobs:
           jf go-config --repo-resolve=robi-go --repo-deploy=robi-go
           jf go build
           jf go-publish v1.0.0
+
+      - name: Generic build
+        run: |
+          cd bash-example
+          jf rt u ./deploy-file.sh ./generic-local-robi --module=generic-module
 
       - name: Publish build info
         run: |
