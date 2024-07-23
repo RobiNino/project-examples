@@ -19,10 +19,13 @@ jobs:
           JF_USER: ${{ secrets.JF_USER }}
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
           #JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
-        #with:
+        with:
+          download-repository: generic-local-robi
+          disable-job-summary: false
         #  # OIDC provider name from the OIDC integration page in the JFrog Platform
         #  #oidc-provider-name: robi-oidc-test-groups
         #  version: latest
+
 
       - name: Setup Python3
         uses: actions/setup-python@v5
@@ -39,9 +42,9 @@ jobs:
 
       - name: Package managers versions
         run: |
-          jf rt dl generic-local-robi/cli-for-summary/jfrog-cli-linux-amd64/jfrog --flat --fail-no-op
-          chmod +x ./jfrog
-          ./jfrog -v
+          #jf rt dl generic-local-robi/cli-for-summary/jfrog-cli-linux-amd64/jfrog --flat --fail-no-op
+          #chmod +x ./jfrog
+          
           jf -v
           which jf
           docker --version
