@@ -39,7 +39,11 @@ jobs:
 
       - name: Package managers versions
         run: |
+          jf rt dl generic-local-robi/cli-for-summary/jfrog-cli-linux-amd64/jfrog --flat --fail-no-op
+          chmod +x ./jfrog
+          ./jfrog -v
           jf -v
+          which jf
           docker --version
           mvn -v
           python --version
