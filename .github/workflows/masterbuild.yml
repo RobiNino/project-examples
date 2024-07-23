@@ -20,7 +20,7 @@ jobs:
 
       - name: Generic build
         run: |
-          jf rt u ./README.md generic-local-robi/ --module=generic-module
+          jf rt u ./README generic-local-robi/ --module=generic-module
       - name: Publish build info
         run: |
           jf rt bce
