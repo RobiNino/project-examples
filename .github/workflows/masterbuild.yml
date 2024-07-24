@@ -1,4 +1,4 @@
-name: "Master Build Example"
+name: "Master Build Mock"
 on: push
 
 permissions:
