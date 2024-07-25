@@ -117,4 +117,4 @@ jobs:
       - name: Publish build info
         run: |
           jf rt bce
-          jf rt bp
+          #jf rt bp
