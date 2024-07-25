@@ -24,7 +24,7 @@ jobs:
           disable-job-summary: false
           version: 2.59.1
         #  # OIDC provider name from the OIDC integration page in the JFrog Platform
-        #  #oidc-provider-name: robi-oidc-test-groups #
+        #  #oidc-provider-name: robi-oidc-test-groups
 
       - name: Setup Python3
         uses: actions/setup-python@v5
