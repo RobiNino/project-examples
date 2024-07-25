@@ -100,6 +100,13 @@ jobs:
           cd bash-example
           jf rt u ./deploy-file.sh generic-local-robi/ --module=generic-module
 
+      - name: Terraform build
+        run: |
+          cd terraform-example
+          jf terraform-config --repo-deploy=robi-terraform-local
+          cd aws
+          jf terraform publish --namespace=example --provider=aws --tag=v0.0.1
+
       - name: Publish build info
         run: |
           jf rt bce
