@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup JFrog CLI
-        uses: https://github.com/RobiNino/setup-jfrog-cli@reorder-summary
+        uses: RobiNino/setup-jfrog-cli@reorder-summary
         env:
           JF_URL: ${{ vars.JF_URL }}
           JF_USER: ${{ secrets.JF_USER }}
