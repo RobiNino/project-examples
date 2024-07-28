@@ -1,9 +1,9 @@
 name: "Master Build Mock"
 on: push
 
-env:
-  JFROG_CLI_BUILD_NAME: "custom build name"
-  JFROG_CLI_BUILD_NUMBER: "123"
+#env:
+#  JFROG_CLI_BUILD_NAME: "custom build name"
+#  JFROG_CLI_BUILD_NUMBER: "123"
 
 permissions:
   # This is required for requesting the OIDC token
