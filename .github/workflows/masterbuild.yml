@@ -22,7 +22,7 @@ jobs:
           #JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
         with:
           download-repository: generic-local-robi
-          #disable-job-summary: true
+          disable-job-summary: true
           version: 2.59.1
         #  # OIDC provider name from the OIDC integration page in the JFrog Platform
         #  #oidc-provider-name: robi-oidc-test-groups
