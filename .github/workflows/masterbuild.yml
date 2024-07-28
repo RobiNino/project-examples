@@ -17,6 +17,7 @@ jobs:
         uses: RobiNino/setup-jfrog-cli@reorder-summary
         env:
           JFROG_CLI_BUILD_NAME: "custom build name"
+          JFROG_CLI_BUILD_NUMBER: "123"
           JF_URL: ${{ vars.JF_URL }}
           JF_USER: ${{ secrets.JF_USER }}
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
