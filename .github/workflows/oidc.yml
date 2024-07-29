@@ -23,7 +23,7 @@ jobs:
         env:
           #JFROG_CLI_BUILD_NAME: "custom build name"
           #JFROG_CLI_BUILD_NUMBER: "123"
-          JF_URL: ${{ vars.JF_URL }}
+          JF_URL: ${{ vars.JF_URL_ECO }}
           #JF_USER: ${{ secrets.JF_USER }}
           #JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
           #JF_PROJECT: jfac
@@ -32,8 +32,8 @@ jobs:
           #download-repository: generic-local-robi
           #disable-job-summary: true
           #version: 2.59.1
-          #oidc-provider-name: oidc-github-project-provider
-          oidc-provider-name: oidc-normal-token
+          oidc-provider-name: oidc-github-project-provider
+          #oidc-provider-name: oidc-normal-token
 
       - name: Generic build
         run: |
