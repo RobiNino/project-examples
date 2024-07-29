@@ -82,12 +82,12 @@ jobs:
       #    docker build -t $DOCKER_IMAGE_NAME .
       #    jf docker push $DOCKER_IMAGE_NAME
       #
-      #- name: Maven build
-      #  run: |
-      #    cd maven-examples/maven-example
-      #    jf mvnc --repo-deploy-releases=libs-release --repo-deploy-snapshots=libs-snapshot --repo-resolve-releases=libs-release --repo-resolve-snapshots=libs-snapshot
-      #    jf mvn clean install
-      #
+      - name: Maven build
+        run: |
+          cd maven-examples/maven-example
+          jf mvnc --repo-deploy-releases=libs-release --repo-deploy-snapshots=libs-snapshot --repo-resolve-releases=libs-release --repo-resolve-snapshots=libs-snapshot
+          jf mvn clean install
+
       #- name: Pip build
       #  run: |
       #    cd python-example/pip-example/
@@ -96,31 +96,31 @@ jobs:
       #    python setup.py sdist bdist_wheel
       #    jf rt u dist/ robi-pypi-virtual/ --module=jfrog-python-example
 
-      - name: Npm build
-        run: |
-          cd npm-example
-          jf npm-config --repo-resolve=robi-npm --repo-deploy=robi-npm
-          jf npm i
-          jf npm publish
+      #- name: Npm build
+      #  run: |
+      #    cd npm-example
+      #    jf npm-config --repo-resolve=robi-npm --repo-deploy=robi-npm
+      #    jf npm i
+      #    jf npm publish
 
-      - name: Go build
-        run: |
-          cd golang-example
-          jf go-config --repo-resolve=robi-go --repo-deploy=robi-go
-          jf go build
-          jf go-publish v1.0.0
+      #- name: Go build
+      #  run: |
+      #    cd golang-example
+      #    jf go-config --repo-resolve=robi-go --repo-deploy=robi-go
+      #    jf go build
+      #    jf go-publish v1.0.0
 
       - name: Generic build
         run: |
           cd bash-example
           jf rt u ./deploy-file.sh generic-local-robi/ --module=generic-module
 
-      - name: Terraform build
-        run: |
-          cd terraformproject
-          jf terraform-config --repo-deploy=robi-terraform-local
-          cd aws
-          jf terraform publish --namespace=example --provider=aws --tag=v0.0.1 --module=terraform-module --exclusions="*test*;*ignore*"
+      #- name: Terraform build
+      #  run: |
+      #    cd terraformproject
+      #    jf terraform-config --repo-deploy=robi-terraform-local
+      #    cd aws
+      #    jf terraform publish --namespace=example --provider=aws --tag=v0.0.1 --module=terraform-module --exclusions="*test*;*ignore*"
 
       - name: Publish build info
         run: |
