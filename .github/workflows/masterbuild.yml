@@ -1,10 +1,5 @@
 name: "Master Build Mock"
-#on: push
-on:
-  push:
-    branches:
-      - 'never'
-
+on: push
 
 #env:
 #  JFROG_CLI_BUILD_NAME: "custom build name"

@@ -1,5 +1,8 @@
 name: "OIDC project"
-on: push
+on:
+  push:
+    branches:
+      - 'never'
 
 #env:
 #  JFROG_CLI_BUILD_NAME: "custom build name"
