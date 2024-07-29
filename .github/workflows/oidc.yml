@@ -28,7 +28,7 @@ jobs:
           JF_PASSWORD: ${{ secrets.JF_PASSWORD_JFAC }}
           #JF_PROJECT: jfac
           #JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
-        with:
+        #with:
           #download-repository: generic-local-robi
           #disable-job-summary: true
           #version: 2.59.1
