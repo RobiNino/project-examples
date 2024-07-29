@@ -40,6 +40,7 @@ jobs:
       - name: Generic build
         run: |
           jf -v
+          jf c use setup-jfrog-cli-server
           jf rt ping
           cd bash-example
           jf rt u ./deploy-file.sh jfac-generic-local/ --module=generic-module
