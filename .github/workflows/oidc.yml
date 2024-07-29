@@ -17,8 +17,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup JFrog CLI
-        uses: jfrog/setup-jfrog-cli@v4
-        #uses: RobiNino/setup-jfrog-cli@oidc-project
+        #uses: jfrog/setup-jfrog-cli@v4
+        uses: RobiNino/setup-jfrog-cli@oidc-project
         #uses: RobiNino/setup-jfrog-cli@reorder-summary
         env:
           #JFROG_CLI_BUILD_NAME: "custom build name"
