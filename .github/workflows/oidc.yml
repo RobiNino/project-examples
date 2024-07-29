@@ -32,8 +32,9 @@ jobs:
           #download-repository: generic-local-robi
           #disable-job-summary: true
           #version: 2.59.1
-          oidc-provider-name: oidc-github-project-provider
+          #oidc-provider-name: oidc-github-project-provider
           #oidc-provider-name: oidc-normal-token
+          oidc-provider-name: robi-oidc-test-groups
 
       - name: Generic build
         run: |
