@@ -82,7 +82,7 @@ jobs:
           export DOCKER_IMAGE_NAME=ecosysjfrog.jfrog.io/docker-local/hello-frog:1.0.0
           docker build -t $DOCKER_IMAGE_NAME .
           jf docker push $DOCKER_IMAGE_NAME
-          jf audit
+          jf scan
 
       #- name: Maven build
       #  run: |
@@ -111,7 +111,7 @@ jobs:
           jf go-config --repo-resolve=go --repo-deploy=go
           jf go build
           jf go-publish v1.0.0
-          jf audit
+          jf scan
 
       - name: Generic build
         run: |
