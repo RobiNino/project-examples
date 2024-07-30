@@ -1,4 +1,4 @@
-name: "Master Build Mock"
+name: "Multi build"
 
 on: push
 
