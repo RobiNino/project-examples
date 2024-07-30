@@ -127,4 +127,8 @@ jobs:
         run: |
           jf rt bce
           jf rt bp
-          jf build-scan --vuln
+          #jf build-scan --vuln
+
+      - name: Scan
+        run: |
+          jf scan curation-project
