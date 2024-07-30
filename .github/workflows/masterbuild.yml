@@ -1,9 +1,6 @@
 name: "Master Build Mock"
 
-on:
-  push:
-    branches:
-      - 'never'
+on: push
 
 #env:
 #  JFROG_CLI_BUILD_NAME: "custom build name"
@@ -69,62 +66,62 @@ jobs:
           npm -v
           go version
 
-      #- name: Docker multi platform build
-      #  run: |
-      #    cd docker-oci-examples/fat-manifest-example
-      #    echo ${{ secrets.JF_PASSWORD }} | docker login ${{ vars.JF_URL }} -u ${{ secrets.JF_USER }} --password-stdin
-      #    docker buildx install
-      #    docker buildx create --use --name mybuilder --driver docker-container
-      #    docker buildx build --platform=linux/amd64,linux/arm64,linux/arm/v7 --tag=ecosysjfrog.jfrog.io/docker-local/multiarch-image:1 -f=Dockerfile.Fatmanifest --metadata-file=build-metadata --push .
-      #    jf rt build-docker-create docker-local --image-file build-metadata
-      #    docker buildx uninstall
-      #
-      #- name: Docker build
-      #  run: |
-      #    cd docker-oci-examples/docker-example
-      #    export DOCKER_IMAGE_NAME=ecosysjfrog.jfrog.io/docker-local/hello-frog:1.0.0
-      #    docker build -t $DOCKER_IMAGE_NAME .
-      #    jf docker push $DOCKER_IMAGE_NAME
-      #
+      - name: Docker multi platform build
+        run: |
+          cd docker-oci-examples/fat-manifest-example
+          echo ${{ secrets.JF_PASSWORD }} | docker login ${{ vars.JF_URL }} -u ${{ secrets.JF_USER }} --password-stdin
+          docker buildx install
+          docker buildx create --use --name mybuilder --driver docker-container
+          docker buildx build --platform=linux/amd64,linux/arm64,linux/arm/v7 --tag=ecosysjfrog.jfrog.io/docker-local/multiarch-image:1 -f=Dockerfile.Fatmanifest --metadata-file=build-metadata --push .
+          jf rt build-docker-create docker-local --image-file build-metadata
+          docker buildx uninstall
+
+      - name: Docker build
+        run: |
+          cd docker-oci-examples/docker-example
+          export DOCKER_IMAGE_NAME=ecosysjfrog.jfrog.io/docker-local/hello-frog:1.0.0
+          docker build -t $DOCKER_IMAGE_NAME .
+          jf docker push $DOCKER_IMAGE_NAME
+
       - name: Maven build
         run: |
           cd maven-examples/maven-example
           jf mvnc --repo-deploy-releases=libs-release --repo-deploy-snapshots=libs-snapshot --repo-resolve-releases=libs-release --repo-resolve-snapshots=libs-snapshot
           jf mvn clean install
 
-      #- name: Pip build
-      #  run: |
-      #    cd python-example/pip-example/
-      #    jf pip-config --repo-resolve=robi-pypi-virtual
-      #    jf pip install . --module=jfrog-python-example
-      #    python setup.py sdist bdist_wheel
-      #    jf rt u dist/ robi-pypi-virtual/ --module=jfrog-python-example
+      - name: Pip build
+        run: |
+          cd python-example/pip-example/
+          jf pip-config --repo-resolve=robi-pypi-virtual
+          jf pip install . --module=jfrog-python-example
+          python setup.py sdist bdist_wheel
+          jf rt u dist/ robi-pypi-virtual/ --module=jfrog-python-example
 
-      #- name: Npm build
-      #  run: |
-      #    cd npm-example
-      #    jf npm-config --repo-resolve=robi-npm --repo-deploy=robi-npm
-      #    jf npm i
-      #    jf npm publish
+      - name: Npm build
+        run: |
+          cd npm-example
+          jf npm-config --repo-resolve=robi-npm --repo-deploy=robi-npm
+          jf npm i
+          jf npm publish
 
-      #- name: Go build
-      #  run: |
-      #    cd golang-example
-      #    jf go-config --repo-resolve=robi-go --repo-deploy=robi-go
-      #    jf go build
-      #    jf go-publish v1.0.0
+      - name: Go build
+        run: |
+          cd golang-example
+          jf go-config --repo-resolve=robi-go --repo-deploy=robi-go
+          jf go build
+          jf go-publish v1.0.0
 
       - name: Generic build
         run: |
           cd bash-example
           jf rt u ./deploy-file.sh generic-local-robi/ --module=generic-module
 
-      #- name: Terraform build
-      #  run: |
-      #    cd terraformproject
-      #    jf terraform-config --repo-deploy=robi-terraform-local
-      #    cd aws
-      #    jf terraform publish --namespace=example --provider=aws --tag=v0.0.1 --module=terraform-module --exclusions="*test*;*ignore*"
+      - name: Terraform build
+        run: |
+          cd terraformproject
+          jf terraform-config --repo-deploy=robi-terraform-local
+          cd aws
+          jf terraform publish --namespace=example --provider=aws --tag=v0.0.1 --module=terraform-module --exclusions="*test*;*ignore*"
 
       - name: Publish build info
         run: |
