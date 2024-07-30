@@ -131,4 +131,6 @@ jobs:
 
       - name: Scan
         run: |
-          jf scan curation-project
+          cd curation-project
+          export JFROG_CLI_LOG_LEVEL=DEBUG
+          jf scan ./
