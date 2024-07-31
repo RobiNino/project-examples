@@ -25,7 +25,7 @@ jobs:
         env:
           #JFROG_CLI_BUILD_NAME: "custom build name"
           #JFROG_CLI_BUILD_NUMBER: "123"
-          #JF_URL: ${{ vars.JF_URL_JFAC }}
+          JF_URL: ${{ vars.JF_URL_JFAC }}
           JF_USER: ${{ secrets.JF_USER_JFAC }}
           JF_PASSWORD: ${{ secrets.JF_PASSWORD_JFAC }}
           #JF_PROJECT: jfac
