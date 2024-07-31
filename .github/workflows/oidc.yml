@@ -43,7 +43,8 @@ jobs:
           jf -v
           jf rt ping
           cd bash-example
-          jf rt u ./deploy-file.sh jfac-generic-local/ --module=generic-module
+          #jf rt u ./deploy-file.sh jfac-generic-local/ --module=generic-module
+          jf rt u ./deploy-file.sh example-repo-local/ --module=generic-module
 
       - name: Publish build info
         run: |
