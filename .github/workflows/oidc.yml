@@ -26,8 +26,8 @@ jobs:
           #JFROG_CLI_BUILD_NAME: "custom build name"
           #JFROG_CLI_BUILD_NUMBER: "123"
           JF_URL: ${{ vars.JF_URL_JFAC }}
-          JF_USER: ${{ secrets.JF_USER_JFAC }}
-          JF_PASSWORD: ${{ secrets.JF_PASSWORD_JFAC }}
+          #JF_USER: ${{ secrets.JF_USER_JFAC }}
+          #JF_PASSWORD: ${{ secrets.JF_PASSWORD_JFAC }}
           #JF_PROJECT: jfac
           #JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
         #with:
@@ -35,7 +35,7 @@ jobs:
           #disable-job-summary: true
           #version: 2.59.1
           #oidc-provider-name: oidc-github-project-provider
-          #oidc-provider-name: oidc-normal-token
+          oidc-provider-name: oidc-normal-token
           #oidc-provider-name: robi-oidc-test-groups
 
       - name: Generic build
