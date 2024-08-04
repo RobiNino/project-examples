@@ -3,7 +3,7 @@ name: "OIDC project"
 on: push
 
 env:
-  JFROG_CLI_LOG_LEVEL: "debug"
+  JFROG_CLI_LOG_LEVEL: "DEBUG"
 
 permissions:
   # This is required for requesting the OIDC token
