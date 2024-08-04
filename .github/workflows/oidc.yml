@@ -2,9 +2,8 @@ name: "OIDC project"
 
 on: push
 
-#env:
-#  JFROG_CLI_BUILD_NAME: "custom build name"
-#  JFROG_CLI_BUILD_NUMBER: "123"
+env:
+  JFROG_CLI_LOG_LEVEL: "debug"
 
 permissions:
   # This is required for requesting the OIDC token
