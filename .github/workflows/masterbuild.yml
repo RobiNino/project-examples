@@ -27,6 +27,7 @@ jobs:
           JF_URL: ${{ vars.JF_URL_ECO }}
           JF_USER: ${{ secrets.JF_USER }}
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+          JF_PROJECT: "robip"
           #JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
         #with:
           #download-repository: generic-local-robi
