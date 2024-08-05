@@ -25,7 +25,7 @@ jobs:
           #JFROG_CLI_BUILD_NAME: "custom build name"
           #JFROG_CLI_BUILD_NUMBER: "123"
           #JF_URL: ${{ secrets.JF_URL_OIDC }}
-          JF_URL: ${{ secrets.JF_URL_ECO }}
+          JF_URL: ${{ vars.JF_URL_ECO }}
           #JF_USER: ${{ secrets.JF_USER_OIDC }}
           #JF_PASSWORD: ${{ secrets.JF_PASSWORD_OIDC }}
           JF_PROJECT: robip
