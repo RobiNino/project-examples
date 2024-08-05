@@ -116,6 +116,12 @@ jobs:
         run: |
           cd bash-example
           jf rt u ./deploy-file.sh generic-local/ --module=my-generic-module
+          jf rt dl generic-local/deploy-file.sh ./dependency-file --module=my-generic-module
+
+      - name: Generic build project
+        run: |
+          cd bash-example
+          jf rt u ./deploy-file.sh robip-generic-local/ --module=my-generic-module-project
 
       - name: Terraform build
         run: |
