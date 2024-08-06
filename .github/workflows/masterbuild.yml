@@ -29,8 +29,8 @@ jobs:
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
           #JF_PROJECT: "robip"
           #JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
-        #with:
-          #download-repository: generic-local-robi
+        with:
+          download-repository: generic-local-robi
           #disable-job-summary: true
           #version: 2.59.1
         #  # OIDC provider name from the OIDC integration page in the JFrog Platform
@@ -74,7 +74,6 @@ jobs:
           docker buildx install
           docker buildx create --use --name mybuilder --driver docker-container
           docker buildx build --platform=linux/amd64,linux/arm64,linux/arm/v7 --tag=ecosysjfrog.jfrog.io/docker-local/multiarch-image:1 -f=Dockerfile.Fatmanifest --metadata-file=build-metadata --push .
-          jf rt u ./build-metadata generic-local/
           jf rt build-docker-create docker-local --image-file build-metadata
           docker buildx uninstall
 
