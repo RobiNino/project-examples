@@ -70,11 +70,10 @@ jobs:
           TWINE_PASSWORD: ${{ secrets.JF_PASSWORD }}
         run: |
           #cd python-example/twine-example/
-          #python -m build
           cd python-example/pip-example/
           jf pip-config --repo-resolve=robi-pypi-virtual
           jf pip install . --module=jfrog-python-example
-          python setup.py sdist bdist_wheel
+          python -m build
           twine upload "dist/*"
 
       - name: Publish build info
