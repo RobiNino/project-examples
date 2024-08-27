@@ -45,23 +45,19 @@ jobs:
       - name: Setup Python Build
         run: python -m pip install --upgrade pip setuptools wheel build twine
 
-      #- name: Package managers versions
-      #  run: |
-      #    #jf rt dl generic-local-robi/cli-for-summary/jfrog-cli-linux-amd64/jfrog --flat --fail-no-op
-      #    #chmod +x ./jfrog
-      #
-      #    jf -v
-      #    which jf
-      #    docker --version
-      #    mvn -v
-      #    python --version
-      #    pip --version
-      #    wheel version
-      #    pip show setuptools
-      #    echo $VIRTUAL_ENV
-      #    node -v
-      #    npm -v
-      #    go version
+      - name: Package managers versions
+        run: |
+          #jf rt dl generic-local-robi/cli-for-summary/jfrog-cli-linux-amd64/jfrog --flat --fail-no-op
+          #chmod +x ./jfrog
+      
+          jf -v
+          which jf
+          python --version
+          pip --version
+          wheel version
+          pip show setuptools
+          pip show build
+          echo $VIRTUAL_ENV
 
       - name: Pip build
         env:
