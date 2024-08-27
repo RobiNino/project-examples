@@ -1,0 +1,84 @@
+name: "Twine build"
+
+on: push
+
+#env:
+#  JFROG_CLI_BUILD_NAME: "custom build name"
+#  JFROG_CLI_BUILD_NUMBER: "123"
+
+permissions:
+  # This is required for requesting the OIDC token
+  id-token: write
+  # This is required for actions/checkout
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+        id: setup-cli
+        #uses: jfrog/setup-jfrog-cli@master
+        #uses: RobiNino/setup-jfrog-cli@reorder-summary
+        env:
+          #JFROG_CLI_BUILD_NAME: "custom build name"
+          #JFROG_CLI_BUILD_NUMBER: "123"
+          JF_URL: ${{ vars.JF_URL_ECO }}
+          JF_USER: ${{ secrets.JF_USER }}
+          JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+          #JF_PROJECT: "robip"
+          #JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+        #with:
+          #download-repository: generic-local-robi
+          #disable-job-summary: true
+          #version: 2.59.1
+        #  # OIDC provider name from the OIDC integration page in the JFrog Platform
+        #  #oidc-provider-name: robi-oidc-test-groups
+
+      - name: Setup Python3
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11.5"
+
+      - name: Setup Python Build
+        #run: python -m pip install --upgrade pip setuptools wheel build
+        run: python -m pip install --upgrade pip build twine
+
+      #- name: Package managers versions
+      #  run: |
+      #    #jf rt dl generic-local-robi/cli-for-summary/jfrog-cli-linux-amd64/jfrog --flat --fail-no-op
+      #    #chmod +x ./jfrog
+      #
+      #    jf -v
+      #    which jf
+      #    docker --version
+      #    mvn -v
+      #    python --version
+      #    pip --version
+      #    wheel version
+      #    pip show setuptools
+      #    echo $VIRTUAL_ENV
+      #    node -v
+      #    npm -v
+      #    go version
+
+      - name: Pip build
+        env:
+          TWINE_REPOSITORY_URL: "https://ecosysjfrog.jfrog.io/artifactory/api/pypi/twine-local"
+          TWINE_USERNAME: ${{ secrets.JF_USER }}
+          TWINE_PASSWORD: ${{ secrets.JF_PASSWORD }}
+        run: |
+          #cd python-example/twine-example/
+          #python -m build
+          cd python-example/pip-example/
+          jf pip-config --repo-resolve=robi-pypi-virtual
+          jf pip install . --module=jfrog-python-example
+          python setup.py sdist bdist_wheel
+          twine upload "dist/*"
+
+      - name: Publish build info
+        run: |
+          jf rt bce
+          jf rt bp
