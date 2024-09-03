@@ -4,6 +4,7 @@ on: push
 permissions:
   id-token: write
   contents: read
+  security-events: write
 
 env:
   DOCKER_REPO: docker-local
