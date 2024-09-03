@@ -76,8 +76,7 @@ jobs:
 
       - name: JF Scan
         run: |
-          cd curation-project
-          jf scan ./
+          jf scan ./curation-project/
       #- name: add docker package to build
       #  run: |
       #    echo "${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}" > metadata.json
