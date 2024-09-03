@@ -1,0 +1,14 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "poetry-project"
+version = "1.0"
+description = "Project example for building Python project with JFrog products"
+authors = ["JFrog <jfrog@jfrog.com>"]
+packages = [{include = "poetry-project"}]
+
+[tool.poetry.dependencies]
+PyYAML = ">3.11"
+nltk = "*"
