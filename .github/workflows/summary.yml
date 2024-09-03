@@ -69,10 +69,15 @@ jobs:
           tags: ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
           provenance: false
 
-      - name: docker scan
+      - name: Docker scan
         run: |
           jf docker pull ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
           jf docker scan ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:latest --vuln --project=${{ vars.JF_PROJECT }} --fail=false --watches=jobsummary
+
+      - name: JF Scan
+        run: |
+          cd curation-project
+          jf scan ./
       #- name: add docker package to build
       #  run: |
       #    echo "${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}" > metadata.json
