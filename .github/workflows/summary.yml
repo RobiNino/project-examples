@@ -73,25 +73,25 @@ jobs:
         run: |
           jf docker pull ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
           jf docker scan ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:latest --vuln --project=${{ vars.JF_PROJECT }} --fail=false --watches=jobsummary
-      - name: add docker package to build
-        run: |
-          echo "${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}" > metadata.json
-          jf rt build-docker-create ${{ env.DOCKER_REPO }} --image-file metadata.json
-      - name: Generic build
-        run: |
-          cd bash-example
-          jf rt u ./deploy-file.sh generic-local/ --module=generic-module
-      - name: Npm curation
-        run: |
-          cd npm-example
-          jf ca
-      - name: publish build info
-        if: always()
-        run: |
-          jf rt build-collect-env
-          jf rt build-add-git
-          jf rt build-publish
-      - name: build scan
-        if : always()
-        run: |
-          jf build-scan --vuln --fail=false
+      #- name: add docker package to build
+      #  run: |
+      #    echo "${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}" > metadata.json
+      #    jf rt build-docker-create ${{ env.DOCKER_REPO }} --image-file metadata.json
+      #- name: Generic build
+      #  run: |
+      #    cd bash-example
+      #    jf rt u ./deploy-file.sh generic-local/ --module=generic-module
+      #- name: Npm curation
+      #  run: |
+      #    cd npm-example
+      #    jf ca
+      #- name: publish build info
+      #  if: always()
+      #  run: |
+      #    jf rt build-collect-env
+      #    jf rt build-add-git
+      #    jf rt build-publish
+      #- name: build scan
+      #  if : always()
+      #  run: |
+      #    jf build-scan --vuln --fail=false
