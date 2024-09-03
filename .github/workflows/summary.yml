@@ -8,7 +8,7 @@ permissions:
 env:
   DOCKER_REPO: docker-local
   IMAGE_NAME: swampapp
-  JF_URL: https://${{ vars.JF_URL_ECO }}/
+  JF_URL: https://${{ vars.JF_URL_ECO_DOCKER }}/
   JFROG_CLI_LOG_LEVEL: DEBUG
   DOCKER_BUILD_SUMMARY: false
   DOCKER_BUILD_RECORD_UPLOAD: false
@@ -31,7 +31,7 @@ jobs:
         env:
           #JFROG_CLI_BUILD_NAME: "custom build name"
           #JFROG_CLI_BUILD_NUMBER: "123"
-          JF_URL_ECO: ${{ vars.JF_URL_ECO_ECO }}
+          JF_URL_ECO_DOCKER: ${{ vars.JF_URL_ECO_DOCKER_ECO }}
           JF_USER: ${{ secrets.JF_USER }}
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
           JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -53,7 +53,7 @@ jobs:
       - name: Authenticate Docker
         uses: docker/login-action@v3
         with:
-          registry: ${{ vars.JF_URL_ECO }}
+          registry: ${{ vars.JF_URL_ECO_DOCKER }}
           username: ${{ secrets.JF_USER }}
           password: ${{ secrets.JF_PASSWORD }}
 
@@ -65,16 +65,16 @@ jobs:
           context: .
           file: docker-oci-examples/fat-manifest-example/Dockerfile.Fatmanifest
           platforms: linux/amd64,linux/arm64
-          tags: ${{ vars.JF_URL_ECO }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
+          tags: ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
           provenance: false
 
       - name: docker scan
         run: |
-          jf docker pull ${{ vars.JF_URL_ECO }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
-          jf docker scan ${{ vars.JF_URL_ECO }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:latest --vuln --project=${{ vars.JF_PROJECT }} --fail=false --watches=Job-Summary
+          jf docker pull ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
+          jf docker scan ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:latest --vuln --project=${{ vars.JF_PROJECT }} --fail=false --watches=Job-Summary
       - name: add docker package to build
         run: |
-          echo "${{ vars.JF_URL_ECO }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}" > metadata.json
+          echo "${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}" > metadata.json
           jf rt build-docker-create ${{ env.DOCKER_REPO }} --image-file metadata.json
       - name: Generic build
         run: |
