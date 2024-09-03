@@ -27,7 +27,7 @@ jobs:
         #uses: jfrog/setup-jfrog-cli@v4
         id: setup-cli
         #uses: jfrog/setup-jfrog-cli@master
-        uses: RobiNino/setup-jfrog-cli@summary-upload
+        uses: RobiNino/setup-jfrog-cli@sarif-upload
         env:
           #JFROG_CLI_BUILD_NAME: "custom build name"
           #JFROG_CLI_BUILD_NUMBER: "123"
