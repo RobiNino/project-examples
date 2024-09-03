@@ -24,6 +24,20 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v4
 
+      - name: Checkout different repository
+        uses: actions/checkout@v4
+        with:
+          repository: RobiNino/jfrog-cli
+          ref: sarif-support
+          # token: ${{ secrets.GITHUB_TOKEN }}
+          path: custom-jf
+
+      - name: Build custom JFrog CLI
+        run: |
+          cd custom-jf
+          ./build/build.sh
+          chmod +x ./jf
+
       - name: Setup JFrog CLI
         #uses: jfrog/setup-jfrog-cli@v4
         id: setup-cli
@@ -46,7 +60,7 @@ jobs:
         #  #oidc-provider-name: robi-oidc-test-groups
 
       - name: Set CLI Config
-        run: jf npm-config --global=true --repo-resolve=robi-npm --repo-deploy=robi-npm
+        run: ./custom-jf/jf npm-config --global=true --repo-resolve=robi-npm --repo-deploy=robi-npm
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -71,13 +85,12 @@ jobs:
 
       - name: Docker scan
         run: |
-          jf docker pull ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
-          jf docker scan ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:latest --vuln --project=${{ vars.JF_PROJECT }} --fail=false --watches=jobsummary
+          ./custom-jf/jf docker pull ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
+          ./custom-jf/jf docker scan ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:latest --vuln --project=${{ vars.JF_PROJECT }} --fail=false --watches=jobsummary
 
       - name: JF Scan
         run: |
-          cd curation-project
-          jf scan ./
+          ./custom-jf/jf scan ./curation-project/
       #- name: add docker package to build
       #  run: |
       #    echo "${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}@${{ steps.build.outputs.digest }}" > metadata.json
