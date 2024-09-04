@@ -53,39 +53,39 @@ jobs:
           #JF_PROJECT: "robip"
           #JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
         with:
-          download-repository: generic-local-robi
-          #version: 2.59.1
+          #download-repository: generic-local-robi
+          version: 2.67.0
         #  # OIDC provider name from the OIDC integration page in the JFrog Platform
         #  #oidc-provider-name: robi-oidc-test-groups
 
       - name: Set CLI Config
         run: ./custom-jf/jf npm-config --global=true --repo-resolve=robi-npm --repo-deploy=robi-npm
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Authenticate Docker
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ vars.JF_URL_ECO_DOCKER }}
-          username: ${{ secrets.JF_USER }}
-          password: ${{ secrets.JF_PASSWORD }}
-
-      - name: Build the Docker image
-        uses: docker/build-push-action@v6
-        id: build
-        with:
-          push: true
-          context: .
-          file: docker-oci-examples/fat-manifest-example/Dockerfile.Fatmanifest
-          platforms: linux/amd64,linux/arm64
-          tags: ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
-          provenance: false
-
-      - name: Docker scan
-        run: |
-          ./custom-jf/jf docker pull ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
-          ./custom-jf/jf docker scan ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:latest --vuln --project=${{ vars.JF_PROJECT }} --fail=false --watches=jobsummary
+      #- name: Set up Docker Buildx
+      #  uses: docker/setup-buildx-action@v3
+#
+      #- name: Authenticate Docker
+      #  uses: docker/login-action@v3
+      #  with:
+      #    registry: ${{ vars.JF_URL_ECO_DOCKER }}
+      #    username: ${{ secrets.JF_USER }}
+      #    password: ${{ secrets.JF_PASSWORD }}
+#
+      #- name: Build the Docker image
+      #  uses: docker/build-push-action@v6
+      #  id: build
+      #  with:
+      #    push: true
+      #    context: .
+      #    file: docker-oci-examples/fat-manifest-example/Dockerfile.Fatmanifest
+      #    platforms: linux/amd64,linux/arm64
+      #    tags: ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
+      #    provenance: false
+#
+     # - name: Docker scan
+     #   run: |
+     #     ./custom-jf/jf docker pull ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
+     #     ./custom-jf/jf docker scan ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:latest --vuln --project=${{ vars.JF_PROJECT }} --fail=false --watches=jobsummary
 
       - name: JF Scan
         run: |
