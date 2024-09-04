@@ -41,8 +41,8 @@ jobs:
       - name: Setup JFrog CLI
         #uses: jfrog/setup-jfrog-cli@v4
         id: setup-cli
-        #uses: jfrog/setup-jfrog-cli@master
-        uses: RobiNino/setup-jfrog-cli@fix-connection-check
+        uses: jfrog/setup-jfrog-cli@master
+        #uses: RobiNino/setup-jfrog-cli@fix-connection-check
         env:
           #JFROG_CLI_BUILD_NAME: "custom build name"
           #JFROG_CLI_BUILD_NUMBER: "123"
@@ -61,31 +61,31 @@ jobs:
       - name: Set CLI Config
         run: ./custom-jf/jf npm-config --global=true --repo-resolve=robi-npm --repo-deploy=robi-npm
 
-      #- name: Set up Docker Buildx
-      #  uses: docker/setup-buildx-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 #
-      #- name: Authenticate Docker
-      #  uses: docker/login-action@v3
-      #  with:
-      #    registry: ${{ vars.JF_URL_ECO_DOCKER }}
-      #    username: ${{ secrets.JF_USER }}
-      #    password: ${{ secrets.JF_PASSWORD }}
+      - name: Authenticate Docker
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ vars.JF_URL_ECO_DOCKER }}
+          username: ${{ secrets.JF_USER }}
+          password: ${{ secrets.JF_PASSWORD }}
 #
-      #- name: Build the Docker image
-      #  uses: docker/build-push-action@v6
-      #  id: build
-      #  with:
-      #    push: true
-      #    context: .
-      #    file: docker-oci-examples/fat-manifest-example/Dockerfile.Fatmanifest
-      #    platforms: linux/amd64,linux/arm64
-      #    tags: ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
-      #    provenance: false
+      - name: Build the Docker image
+        uses: docker/build-push-action@v6
+        id: build
+        with:
+          push: true
+          context: .
+          file: docker-oci-examples/fat-manifest-example/Dockerfile.Fatmanifest
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
+          provenance: false
 #
-     # - name: Docker scan
-     #   run: |
-     #     ./custom-jf/jf docker pull ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
-     #     ./custom-jf/jf docker scan ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:latest --vuln --project=${{ vars.JF_PROJECT }} --fail=false --watches=jobsummary
+      - name: Docker scan
+        run: |
+          ./custom-jf/jf docker pull ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
+          ./custom-jf/jf docker scan ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:latest --vuln --project=${{ vars.JF_PROJECT }} --fail=false --watches=jobsummary
 
       - name: JF Scan
         run: |
