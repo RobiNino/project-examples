@@ -152,8 +152,8 @@ jobs:
     #      cd aws
     #      jf terraform publish --namespace=example --provider=aws --tag=v0.0.1 --module=terraform-module --exclusions="*test*;*ignore*"
 
-      - name: Publish build info
-        run: |
-          jf rt bce
-          jf rt bp
-          #jf build-scan --vuln
+      #- name: Publish build info
+      #  run: |
+      #    jf rt bce
+      #    jf rt bp
+      #    #jf build-scan --vuln
