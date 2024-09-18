@@ -2,7 +2,8 @@ name: "Twine build"
 
 on: push
 
-#env:
+env:
+  JFROG_CLI_LOG_LEVEL: "DEBUG"
 #  JFROG_CLI_BUILD_NAME: "custom build name"
 #  JFROG_CLI_BUILD_NUMBER: "123"
 
@@ -30,10 +31,10 @@ jobs:
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
           #JF_PROJECT: "robip"
           #JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
-        #with:
-          #download-repository: generic-local-robi
+        with:
+          download-repository: generic-local-robi
           #disable-job-summary: true
-          #version: 2.59.1
+          version: 2.67.0
         #  # OIDC provider name from the OIDC integration page in the JFrog Platform
         #  #oidc-provider-name: robi-oidc-test-groups
 
@@ -60,19 +61,10 @@ jobs:
           echo $VIRTUAL_ENV
 
       - name: Pip build
-        env:
-          TWINE_REPOSITORY_URL: "https://ecosysjfrog.jfrog.io/artifactory/api/pypi/twine-local"
-          TWINE_USERNAME: ${{ secrets.JF_USER }}
-          TWINE_PASSWORD: ${{ secrets.JF_PASSWORD }}
         run: |
           #cd python-example/twine-example/
           cd python-example/pip-example/
-          jf pip-config --repo-resolve=robi-pypi-virtual
+          jf pip-config --repo-resolve=robi-pypi-virtual --repo-deploy=twine-local
           jf pip install . --module=jfrog-python-example
           python -m build
-          twine upload "dist/*"
-
-      - name: Publish build info
-        run: |
-          jf rt bce
-          jf rt bp
+          jf twine upload "dist/*"

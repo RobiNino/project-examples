@@ -58,8 +58,13 @@ Using requirements.txt:
 Package the project, create distribution archives (tar.gz and whl):
 > python setup.py sdist bdist_wheel
 
+Using toml:
+> jf pip install .
+> python -m build --sdist --wheel
+
+
 Upload the packages to the pypi repository in Artifactory:
-> jf rt u dist/ pypi/ --build-name=my-pip-build --build-number=1 --module=jfrog-python-example
+> jf twine upload "dist/*" --build-name=my-pip-build --build-number=1 --module=jfrog-python-example
 
 Collect environment variables and add them to the build info:
 > jf rt bce my-pip-build 1
