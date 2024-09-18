@@ -65,6 +65,6 @@ jobs:
           #cd python-example/twine-example/
           cd python-example/pip-example/
           jf pip-config --repo-resolve=robi-pypi-virtual --repo-deploy=twine-local
-          jf pip install . --module=jfrog-python-example
+          jf pip install .
           python -m build
           jf twine upload "dist/*"
