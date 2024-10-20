@@ -47,6 +47,10 @@ jobs:
           wheel version
           pip show setuptools
           echo $VIRTUAL_ENV
+          echo {{ vars.JF_URL_ECO }}
+          echo "{{ vars.JF_URL_ECO }}"
+          echo "{{vars.JF_URL_ECO}}"
+          echo {{vars.JF_URL_ECO}}
 
       - run: jf c add custom-server --url {{ vars.JF_URL_ECO }} #--user=\"${{ secrets.JF_USER }}\" --password=\"${{ secrets.JF_REF_TOKEN_ECO }}\"
 
