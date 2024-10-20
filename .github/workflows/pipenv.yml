@@ -26,7 +26,7 @@ jobs:
           JF_PASSWORD: ${{ secrets.JF_ACCESS_TOKEN }}
           #JF_ACCESS_TOKEN: ${{  }}
         with:
-          version: 2.67.0
+          version: 2.65.0
         #  # OIDC provider name from the OIDC integration page in the JFrog Platform
         #  #oidc-provider-name: robi-oidc-test-groups
 
