@@ -38,11 +38,6 @@ jobs:
       - name: Setup Pipenv
         run: python -m pip install --upgrade pip setuptools wheel pipenv
 
-      - name: Install npm
-        uses: actions/setup-node@v4
-        with:
-          node-version: "16"
-
       - name: Package managers versions
         run: |
           jf -v
@@ -53,10 +48,16 @@ jobs:
           pip show setuptools
           echo $VIRTUAL_ENV
 
-      - name: Pip build
+      - name: Pipenv build
         run: |
           cd python-example/pipenv-example/
           jf pipenv-config --repo-resolve=robi-pypi-virtual
           jf pipenv install
           python setup.py sdist bdist_wheel
+          #jf rt u dist/ robi-pypi-virtual/ --module=jfrog-python-example
+
+      - name: upload
+        run: |
+          cd python-example/pipenv-example/
+          ls -al
           jf rt u dist/ robi-pypi-virtual/ --module=jfrog-python-example
