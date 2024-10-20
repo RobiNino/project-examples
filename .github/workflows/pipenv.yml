@@ -48,7 +48,7 @@ jobs:
           pip show setuptools
           echo $VIRTUAL_ENV
 
-      - name: Pipenv build
+      - name: Pipenv install
         run: |
           cd python-example/pipenv-example/
           jf pipenv-config --repo-resolve=robi-pypi-virtual
@@ -56,8 +56,8 @@ jobs:
           python setup.py sdist bdist_wheel
           #jf rt u dist/ robi-pypi-virtual/ --module=jfrog-python-example
 
-      - name: upload
-        run: |
-          cd python-example/pipenv-example/
-          ls -al
-          jf rt u dist/ robi-pypi-virtual/ --module=jfrog-python-example
+      #- name: Pipenv package and upload
+      #  run: |
+      #    cd python-example/pipenv-example/
+      #    ls -al
+      #    jf rt u dist/ robi-pypi-virtual/ --module=jfrog-python-example
