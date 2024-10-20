@@ -48,7 +48,7 @@ jobs:
           pip show setuptools
           echo $VIRTUAL_ENV
 
-      - run: jf c add serverId --url={{ vars.JF_URL_ECO }} #--user=\"${{ secrets.JF_USER }}\" --password=\"${{ secrets.JF_REF_TOKEN_ECO }}\"
+      - run: jf c add custom-server #--url={{ vars.JF_URL_ECO }} #--user=\"${{ secrets.JF_USER }}\" --password=\"${{ secrets.JF_REF_TOKEN_ECO }}\"
 
       - name: Pipenv install
         run: |
