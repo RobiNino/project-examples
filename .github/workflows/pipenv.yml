@@ -52,7 +52,7 @@ jobs:
         run: |
           cd python-example/pipenv-example/
           jf pipenv-config --repo-resolve=robi-pypi-virtual
-          jf pipenv install
+          jf pipenv install --dev
           #python setup.py sdist bdist_wheel
           #jf rt u dist/ robi-pypi-virtual/ --module=jfrog-python-example
 
