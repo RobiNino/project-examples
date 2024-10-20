@@ -50,7 +50,7 @@ jobs:
 
       - name: Pipenv install
         run: |
-          jf c add serverId --url {{vars.JF_URL_ECO}} --user ${{secrets.JF_USER}} --password ${{secrets.JF_REF_TOKEN_ECO}}
+          jf c add serverId --url=\"{{ vars.JF_URL_ECO }}\" --user=\"${{ secrets.JF_USER }}\" --password=\"${{ secrets.JF_REF_TOKEN_ECO }}\"
           jf c show
           cd python-example/pipenv-example/
           jf pipenv-config --repo-resolve=robi-pypi-virtual
