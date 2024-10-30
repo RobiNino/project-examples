@@ -27,8 +27,8 @@ jobs:
         #id: setup-cli
         env:
           JF_URL: ${{ vars.JF_URL_ECO }}
-          JF_USER: ${{ secrets.JF_USER }}
-          JF_PASSWORD: ${{ secrets.JF_REF_TOKEN_ECO }}
+          JF_USER: ${{ secrets.JF_USER_PIP }}
+          JF_PASSWORD: ${{ secrets.JF_PASS_PIP }}
           #JF_ACCESS_TOKEN: ${{ secrets.JF_REF_TOKEN_ECO }}
         with:
           version: 2.67.0
