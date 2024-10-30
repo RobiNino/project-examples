@@ -12,8 +12,13 @@ permissions:
   contents: read
   security-events: write
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  Python-Tests:
+    name: ${{ matrix.os }}
+    strategy:
+      #fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-13 ]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -60,7 +65,7 @@ jobs:
           cd python-example/pipenv-example/
           jf pipenv-config --repo-resolve=robi-pypi-virtual
           jf pipenv lock
-          jf pipenv install --dev
+          jf pipenv install --dev --verbose
           #python setup.py sdist bdist_wheel
           #jf rt u dist/ robi-pypi-virtual/ --module=jfrog-python-example  
 
