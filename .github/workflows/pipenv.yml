@@ -20,11 +20,11 @@ jobs:
       - name: Setup JFrog CLI
         uses: jfrog/setup-jfrog-cli@v4
         #id: setup-cli
-        #env:
-        #  JF_URL: ${{ vars.JF_URL_ECO }}
-        #  JF_USER: ${{ secrets.JF_USER }}
-        #  JF_PASSWORD: ${{ secrets.JF_REF_TOKEN_ECO }}
-          #JF_ACCESS_TOKEN: ${{  }}
+        env:
+          JF_URL: ${{ vars.JF_URL_ECO }}
+          JF_USER: ${{ secrets.JF_USER }}
+          #JF_PASSWORD: ${{ secrets.JF_REF_TOKEN_ECO }}
+          JF_ACCESS_TOKEN: ${{ secrets.JF_REF_TOKEN_ECO }}
         with:
           version: 2.67.0
         #  # OIDC provider name from the OIDC integration page in the JFrog Platform
@@ -52,16 +52,17 @@ jobs:
           echo "{{vars.JF_URL_ECO}}"
           echo {{vars.JF_URL_ECO}}
 
-      - run: jf c add custom-server --url {{ vars.JF_URL_ECO }} #--user=\"${{ secrets.JF_USER }}\" --password=\"${{ secrets.JF_REF_TOKEN_ECO }}\"
+      #- run: jf c add custom-server --url {{ vars.JF_URL_ECO }} #--user=\"${{ secrets.JF_USER }}\" --password=\"${{ secrets.JF_REF_TOKEN_ECO }}\"
 
       - name: Pipenv install
         run: |
           jf c show
           cd python-example/pipenv-example/
           jf pipenv-config --repo-resolve=robi-pypi-virtual
+          jf pipenv lock
           jf pipenv install --dev
           #python setup.py sdist bdist_wheel
-          #jf rt u dist/ robi-pypi-virtual/ --module=jfrog-python-example
+          #jf rt u dist/ robi-pypi-virtual/ --module=jfrog-python-example  
 
       #- name: Pipenv package and upload
       #  run: |
