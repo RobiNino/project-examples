@@ -27,8 +27,8 @@ jobs:
         #id: setup-cli
         env:
           JF_URL: ${{ vars.JF_URL_ECO }}
-          JF_USER: ${{ secrets.JF_USER_ECO }}
-          JF_PASSWORD: ${{ secrets.JF_PASS_ECO }}
+          JF_USER: ${{ secrets.JF_USER }}
+          JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
           #JF_ACCESS_TOKEN: ${{ secrets.JF_REF_TOKEN_ECO }}
         #with:
         #  version: 2.67.0
@@ -39,3 +39,4 @@ jobs:
         run: |
           jf rt ping
           jf c show
+          env | grep SETUP_JFROG_CLI_SERVER_IDS
