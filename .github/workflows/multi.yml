@@ -39,4 +39,4 @@ jobs:
         run: |
           jf rt ping
           jf c show
-          env | grep SETUP_JFROG_CLI_SERVER_IDS
+          echo $SETUP_JFROG_CLI_SERVER_IDS
