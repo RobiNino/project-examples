@@ -37,5 +37,5 @@ jobs:
 
       - name: Check
         run: |
-          - jf rt ping
-          - jf c show
+          jf rt ping
+          jf c show
