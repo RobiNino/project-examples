@@ -41,3 +41,10 @@ jobs:
           jf c show
           echo "SETUP_JFROG_CLI_SERVER_IDS:"
           echo $SETUP_JFROG_CLI_SERVER_IDS
+
+      - name: Check 2
+        run: |
+          jf rt ping
+          jf c show
+          echo "SETUP_JFROG_CLI_SERVER_IDS:"
+          echo $SETUP_JFROG_CLI_SERVER_IDS
