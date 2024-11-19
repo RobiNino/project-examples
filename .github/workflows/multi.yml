@@ -22,18 +22,30 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup JFrog CLI
+      - name: Setup JFrog CLI 1
         uses: RobiNino/setup-jfrog-cli@multi-config
-        #id: setup-cli
         env:
           JF_URL: ${{ vars.JF_URL_ECO }}
           JF_USER: ${{ secrets.JF_USER }}
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
-          #JF_ACCESS_TOKEN: ${{ secrets.JF_REF_TOKEN_ECO }}
-        #with:
-        #  version: 2.67.0
-        #  # OIDC provider name from the OIDC integration page in the JFrog Platform
-        #  #oidc-provider-name: robi-oidc-test-groups
+
+      - name: Setup JFrog CLI 2
+        uses: RobiNino/setup-jfrog-cli@multi-config
+        env:
+          JF_URL: ${{ vars.JF_URL_ECO }}
+          JF_USER: ${{ secrets.JF_USER }}
+          JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+        with:
+          custom-server-id: "my-server-2"
+
+      - name: Setup JFrog CLI 3
+        uses: RobiNino/setup-jfrog-cli@multi-config
+        env:
+          JF_URL: ${{ vars.JF_URL_ECO }}
+          JF_USER: ${{ secrets.JF_USER }}
+          JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+        with:
+          custom-server-id: "my-server-3"
 
       - name: Check
         run: |
@@ -44,7 +56,7 @@ jobs:
 
       - name: Check 2
         run: |
-          jf rt ping
+          jf rt ping --server-id=my-server-2
           jf c show
           echo "SETUP_JFROG_CLI_SERVER_IDS:"
           echo $SETUP_JFROG_CLI_SERVER_IDS
