@@ -20,14 +20,14 @@ jobs:
         os: [ ubuntu-latest ]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup JFrog CLI 1
-        uses: RobiNino/setup-jfrog-cli@multi-config
-        env:
-          JF_URL: ${{ vars.JF_URL_ECO }}
-          JF_USER: ${{ secrets.JF_USER }}
-          JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+      #- name: Checkout
+      #  uses: actions/checkout@v4
+      #- name: Setup JFrog CLI 1
+      #  uses: RobiNino/setup-jfrog-cli@multi-config
+      #  env:
+      #    JF_URL: ${{ vars.JF_URL_ECO }}
+      #    JF_USER: ${{ secrets.JF_USER }}
+      #    JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
 
       - name: Setup JFrog CLI 2
         uses: RobiNino/setup-jfrog-cli@multi-config
