@@ -106,11 +106,11 @@ jobs:
         run: |
           jf scan ./curation-project/
 
-      - name: Maven build
-        run: |
-          cd maven-examples/maven-example
-          jf mvnc --repo-deploy-releases=libs-release --repo-deploy-snapshots=libs-snapshot --repo-resolve-releases=libs-release --repo-resolve-snapshots=libs-snapshot
-          jf mvn clean install
+      #- name: Maven build
+      #  run: |
+      #    cd maven-examples/maven-example
+      #    jf mvnc --repo-deploy-releases=libs-release --repo-deploy-snapshots=libs-snapshot --repo-resolve-releases=libs-release --repo-resolve-snapshots=libs-snapshot
+      #    jf mvn clean install
 
       - name: Pip build
         run: |
