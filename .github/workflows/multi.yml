@@ -20,17 +20,17 @@ jobs:
         os: [ ubuntu-latest ]
     runs-on: ${{ matrix.os }}
     steps:
-      #- name: Checkout
-      #  uses: actions/checkout@v4
-      #- name: Setup JFrog CLI 1
-      #  uses: RobiNino/setup-jfrog-cli@multi-config
-      #  env:
-      #    JF_URL: ${{ vars.JF_URL_ECO }}
-      #    JF_USER: ${{ secrets.JF_USER }}
-      #    JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup JFrog CLI 1
+        uses: RobiNino/setup-jfrog-cli@revert-default-server
+        env:
+          JF_URL: ${{ vars.JF_URL_ECO }}
+          JF_USER: ${{ secrets.JF_USER }}
+          JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
 
       - name: Setup JFrog CLI 2
-        uses: RobiNino/setup-jfrog-cli@multi-config
+        uses: RobiNino/setup-jfrog-cli@revert-default-server
         env:
           JF_URL: ${{ vars.JF_URL_ECO }}
           JF_USER: ${{ secrets.JF_USER }}
@@ -39,7 +39,7 @@ jobs:
           custom-server-id: "my-server-2"
 
       - name: Setup JFrog CLI 3
-        uses: RobiNino/setup-jfrog-cli@multi-config
+        uses: RobiNino/setup-jfrog-cli@revert-default-server
         env:
           JF_URL: ${{ vars.JF_URL_ECO }}
           JF_USER: ${{ secrets.JF_USER }}
@@ -47,9 +47,16 @@ jobs:
         with:
           custom-server-id: "my-server-3"
 
-      - name: Check
+      - name: Check default
         run: |
           jf rt ping
+          jf c show
+          echo "SETUP_JFROG_CLI_SERVER_IDS:"
+          echo $SETUP_JFROG_CLI_SERVER_IDS
+
+      - name: Check default specific
+        run: |
+          jf rt ping --server-id=setup-jfrog-cli-server
           jf c show
           echo "SETUP_JFROG_CLI_SERVER_IDS:"
           echo $SETUP_JFROG_CLI_SERVER_IDS
@@ -57,6 +64,13 @@ jobs:
       - name: Check 2
         run: |
           jf rt ping --server-id=my-server-2
+          jf c show
+          echo "SETUP_JFROG_CLI_SERVER_IDS:"
+          echo $SETUP_JFROG_CLI_SERVER_IDS
+
+      - name: Check 3
+        run: |
+          jf rt ping --server-id=my-server-3
           jf c show
           echo "SETUP_JFROG_CLI_SERVER_IDS:"
           echo $SETUP_JFROG_CLI_SERVER_IDS
