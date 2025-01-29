@@ -98,7 +98,7 @@ jobs:
 
       - name: Docker pull
         run: |
-          jf docker pull redhat/ubi8-micro:8.5
+          jf docker pull ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/alpine:latest
 
       - name: Docker scan
         run: |
