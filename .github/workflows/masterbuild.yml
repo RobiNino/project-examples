@@ -98,7 +98,7 @@ jobs:
 
       - name: Docker pull
         run: |
-          jf docker pull ${{ vars.JF_URL_ECO_DOCKER }}/${{ env.DOCKER_REPO }}/alpine:latest
+          jf docker pull ${{ vars.JF_URL_ECO_DOCKER }}/docker-virtual/alpine:latest
 
       - name: Docker scan
         run: |
