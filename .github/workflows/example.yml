@@ -1,0 +1,38 @@
+name: "Multi build"
+
+on: push
+
+env:
+  JFROG_CLI_LOG_LEVEL: DEBUG
+
+permissions:
+  # This is required for requesting the OIDC token
+  id-token: write
+  # This is required for actions/checkout
+  contents: read
+  security-events: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+        id: setup-cli
+        env:
+          JF_URL: ${{ vars.JF_URL_ECO }}
+          JF_USER: ${{ secrets.JF_USER }}
+          JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+          JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          version: 2.67.0
+
+      - name: Package managers versions
+        run: |
+          jf -v
+
+      - name: Ping Artifactory
+        run: |
+          jf rt ping
+          env
